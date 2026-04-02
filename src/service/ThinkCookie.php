@@ -1,0 +1,82 @@
+<?php
+
+declare(strict_types=1);
+/**
+ * +----------------------------------------------------------------------
+ * | ThinkAdmin Plugin for ThinkAdminDeveloper
+ * +----------------------------------------------------------------------
+ * | Copyright (c) 2014~2026 ThinkAdmin [ thinkadmin.top ]
+ * +----------------------------------------------------------------------
+ * | Official Website: https://thinkadmin.top
+ * +----------------------------------------------------------------------
+ * | Licensed: https://mit-license.org
+ * | Disclaimer: https://thinkadmin.top/disclaimer
+ * | Vip Rights: https://thinkadmin.top/vip-introduce
+ * +----------------------------------------------------------------------
+ * | Gitee Repository: https://gitee.com/zoujingli/ThinkAdmin
+ * | Github Repository: https://github.com/zoujingli/ThinkAdmin
+ * +----------------------------------------------------------------------
+ */
+
+namespace plugin\worker\service;
+
+use think\Cookie;
+use Workerman\Protocols\Http\Response;
+
+/**
+ * 自定义 Cookie.
+ * @class ThinkCookie
+ */
+class ThinkCookie extends Cookie
+{
+    /** @var Response */
+    protected $response;
+
+    /**
+     * 绑定响应对象
+     */
+    public function withWorkerResponse(): Response
+    {
+        $this->cookie = [];
+        return $this->response = new Response();
+    }
+
+    /**
+     * 保存 Cookie 数据.
+     * Worker 下已绑定 Workerman Response 时始终写回 Set-Cookie，不依赖 config[setcookie]（该配置仅控制 PHP/Think 响应写回）。
+     *
+     * @param string $name cookie名称
+     * @param string $value cookie值
+     * @param int $expire cookie过期时间
+     * @param string $path 有效的服务器路径
+     * @param string $domain 有效域名/子域名
+     * @param bool $secure 是否仅仅通过HTTPS
+     * @param bool $httponly 仅可通过HTTP访问
+     * @param string $samesite 防止CSRF攻击和用户追踪
+     */
+    protected function saveCookie(string $name, string $value, int $expire, string $path, string $domain, bool $secure, bool $httponly, string $samesite): void
+    {
+        if (!isset($this->response)) {
+            return;
+        }
+        $isWorkerResponse = $this->response instanceof Response;
+        if ($isWorkerResponse || !empty($this->config['setcookie'])) {
+            $maxAge = $expire > 0 ? max(0, $expire - time()) : null;
+            $this->response->cookie($name, $value, $maxAge, $path, $domain, $secure, $httponly, $samesite);
+
+            if (worker_auth_debug_enabled() && in_array($name, ['system_access_token', 'account_access_token'], true)) {
+                worker_auth_debug('worker.cookie.save', [
+                    'name' => $name,
+                    'expire_at' => $expire,
+                    'max_age' => $maxAge,
+                    'path' => $path,
+                    'domain' => $domain,
+                    'secure' => $secure,
+                    'httponly' => $httponly,
+                    'samesite' => $samesite,
+                    'value' => worker_auth_token_snapshot($value),
+                ]);
+            }
+        }
+    }
+}
