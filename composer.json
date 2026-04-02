@@ -6,8 +6,8 @@
     "description": "Standard HTTP, queue, and cross-platform process manager for ThinkAdmin",
     "authors": [
         {
-            "name": "Anyon",
-            "email": "zoujingli@qq.com"
+            "name": "baolong",
+            "email": "baolong@qq.com"
         }
     ],
     "require": {
