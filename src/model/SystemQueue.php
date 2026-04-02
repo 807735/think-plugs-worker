@@ -18,7 +18,7 @@ declare(strict_types=1);
  * +----------------------------------------------------------------------
  */
 
-namespace plugin\worker\model;
+namespace think\worker\model;
 
 use think\admin\Model;
 

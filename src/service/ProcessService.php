@@ -18,7 +18,7 @@ declare(strict_types=1);
  * +----------------------------------------------------------------------
  */
 
-namespace plugin\worker\service;
+namespace think\worker\service;
 
 use Symfony\Component\Process\Process;
 use think\admin\extend\CodeToolkit;

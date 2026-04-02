@@ -18,14 +18,14 @@ declare(strict_types=1);
  * +----------------------------------------------------------------------
  */
 
-namespace plugin\worker\command;
+namespace think\worker\command;
 
-use plugin\worker\model\SystemQueue;
-use plugin\worker\service\HttpServer;
-use plugin\worker\service\ProcessService;
-use plugin\worker\service\QueueServer;
-use plugin\worker\service\QueueService as WorkerQueueService;
-use plugin\worker\service\WorkerConfig;
+use think\worker\model\SystemQueue;
+use think\worker\service\HttpServer;
+use think\worker\service\ProcessService;
+use think\worker\service\QueueServer;
+use think\worker\service\QueueService as WorkerQueueService;
+use think\worker\service\WorkerConfig;
 use think\admin\Command;
 use think\admin\service\QueueService as QueueRuntime;
 use think\console\Input;

@@ -18,12 +18,12 @@ declare(strict_types=1);
  * +----------------------------------------------------------------------
  */
 
-namespace plugin\worker;
+namespace think\worker;
 
-use plugin\worker\command\Queue;
-use plugin\worker\command\Worker;
-use plugin\worker\service\ProcessService;
-use plugin\worker\service\QueueService;
+use think\worker\command\Queue;
+use think\worker\command\Worker;
+use think\worker\service\ProcessService;
+use think\worker\service\QueueService;
 use think\admin\Library;
 use think\admin\Plugin;
 use think\admin\service\QueueService as QueueRuntime;

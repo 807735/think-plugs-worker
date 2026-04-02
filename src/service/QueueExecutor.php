@@ -18,9 +18,9 @@ declare(strict_types=1);
  * +----------------------------------------------------------------------
  */
 
-namespace plugin\worker\service;
+namespace think\worker\service;
 
-use plugin\worker\model\SystemQueue;
+use think\worker\model\SystemQueue;
 use think\admin\contract\QueueHandlerInterface;
 use think\admin\Exception;
 use think\admin\runtime\RequestContext;

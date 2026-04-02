@@ -18,7 +18,7 @@ declare(strict_types=1);
  * +----------------------------------------------------------------------
  */
 
-namespace plugin\worker\service;
+namespace think\worker\service;
 
 use think\admin\service\RuntimeService;
 use think\exception\Handle;

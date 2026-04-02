@@ -18,12 +18,12 @@ declare(strict_types=1);
  * +----------------------------------------------------------------------
  */
 
-namespace plugin\worker\command;
+namespace think\worker\command;
 
-use plugin\system\service\ConfigService as SystemConfigService;
-use plugin\worker\model\SystemQueue;
-use plugin\worker\service\QueueExecutor;
-use plugin\worker\service\QueueService;
+use think\admin\service\ConfigService as SystemConfigService;
+use think\worker\model\SystemQueue;
+use think\worker\service\QueueExecutor;
+use think\worker\service\QueueService;
 use think\admin\Command;
 use think\admin\Exception;
 use think\console\Input;

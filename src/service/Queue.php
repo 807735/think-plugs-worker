@@ -18,7 +18,7 @@ declare(strict_types=1);
  * +----------------------------------------------------------------------
  */
 
-namespace plugin\worker\service;
+namespace think\worker\service;
 
 use think\admin\contract\QueueHandlerInterface;
 use think\admin\contract\QueueRuntimeInterface;
